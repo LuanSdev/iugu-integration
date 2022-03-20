@@ -7,5 +7,6 @@
     "strict": false,
     "skipLibCheck": true,
     "types": ["@types/jest"]
-  }
+  },
+  "include": ["src"]
 }
