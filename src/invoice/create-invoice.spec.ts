@@ -15,4 +15,14 @@ describe('Create invoice', () => {
 
     expect(response.id).toBeTruthy();
   });
+
+  it('Should throw if no params is provided', async () => {
+    const { sut } = makeSut();
+
+    //eslint-disable-next-line
+    //@ts-ignore
+    const promise = sut.create();
+
+    await expect(promise).rejects.toThrow();
+  });
 });

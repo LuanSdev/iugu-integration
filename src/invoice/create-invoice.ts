@@ -1,5 +1,5 @@
 import { IuguInvoiceCreateRequest, IuguInvoiceCreateResponse } from '@types';
-import { IuguConfig } from 'config/iugu-config';
+import { IuguConfig } from '../config/iugu-config';
 
 export class CreateInvoice extends IuguConfig {
   private data: IuguInvoiceCreateRequest;
@@ -10,7 +10,11 @@ export class CreateInvoice extends IuguConfig {
     this.handle = this.handle.bind(this);
   }
 
-  create(data: IuguInvoiceCreateRequest) {
+  async create(data: IuguInvoiceCreateRequest) {
+    if (!data) {
+      throw new Error('Missing invoice data');
+    }
+
     this.data = data;
 
     return new Promise<IuguInvoiceCreateResponse>(this.handle);
