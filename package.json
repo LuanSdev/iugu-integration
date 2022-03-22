@@ -22,6 +22,6 @@
     "test:unit": "jest --watch -o"
   },
   "dependencies": {
-    "iugu": "^0.0.6"
+    "axios": "^0.26.1"
   }
 }
