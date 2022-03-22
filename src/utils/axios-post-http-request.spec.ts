@@ -1,21 +1,22 @@
 import axios from 'axios';
 
-import { IGetHttpRequest, THttpRequest } from './protocols/get-http-request';
+import { THttpRequest } from '../@types/http-request';
+import { IPostHttpRequest } from './protocols/post-http-request';
 
-class AxiosGetHttpRequest implements IGetHttpRequest {
-  async get<TResponse, TParams>(
+class AxiosPostHttpRequest implements IPostHttpRequest {
+  async post<TResponse, TParams>(
     httpRequest: THttpRequest<TParams>
   ): Promise<TResponse> {
     const { query, url } = httpRequest;
 
-    const { data } = await axios.get(url, { params: { query } });
+    const { data } = await axios.post(url, { params: { query } });
 
     return data;
   }
 }
 
 const makeSut = () => {
-  const sut = new AxiosGetHttpRequest();
+  const sut = new AxiosPostHttpRequest();
 
   return { sut };
 };
@@ -26,7 +27,7 @@ describe('Axios Http request', () => {
 
     //eslint-disable-next-line
     //@ts-ignore
-    const promise = sut.get();
+    const promise = sut.post();
 
     await expect(promise).rejects.toThrow();
   });
