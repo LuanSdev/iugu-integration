@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:unit": "jest --watch -o"
+    "test:unit": "jest --watch -o --maxWorkers=1"
   },
   "dependencies": {
     "axios": "^0.26.1"
