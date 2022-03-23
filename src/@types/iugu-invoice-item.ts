@@ -1,9 +1,9 @@
 export type IuguInvoiceItem = {
-  id: string;
-  created_at: string;
-  description: string;
+  id?: string;
+  created_at?: string;
+  description?: string;
   price_cents: number;
-  price: string;
+  price?: string;
   quantity: number;
-  updated_at: string;
+  updated_at?: string;
 };
