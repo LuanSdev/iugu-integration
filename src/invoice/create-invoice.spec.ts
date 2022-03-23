@@ -1,21 +1,40 @@
+import { THttpRequest } from '../@types/http-request';
+import { IPostHttpRequest } from '../utils/protocols/post-http-request';
 import { IuguInvoiceCreateRequest } from '../@types';
 import { CreateInvoice } from './create-invoice';
 
-const makeSut = () => {
-  const sut = new CreateInvoice();
+class PostHttpRequestSpy implements IPostHttpRequest {
+  public data: any;
+  public callsCount: number;
+  public httpRequest: THttpRequest<any>;
 
-  return { sut };
+  constructor() {
+    this.callsCount = 0;
+    this.data = {
+      id: 'any-id',
+    };
+  }
+
+  async post(httpRequest: any): Promise<any> {
+    this.callsCount++;
+    this.httpRequest = httpRequest;
+
+    return this.data;
+  }
+}
+
+const makePostHttpRequestSpy = () => {
+  return new PostHttpRequestSpy();
+};
+
+const makeSut = () => {
+  const postHttpRequestSpy = makePostHttpRequestSpy();
+  const sut = new CreateInvoice({ postHttpRequest: postHttpRequestSpy });
+
+  return { sut, postHttpRequestSpy };
 };
 
 describe('Create invoice', () => {
-  it('Should receive a truthy response with an id', async () => {
-    const { sut } = makeSut();
-
-    const response = await sut.create({} as IuguInvoiceCreateRequest);
-
-    expect(response.id).toBeTruthy();
-  });
-
   it('Should throw if no params is provided', async () => {
     const { sut } = makeSut();
 
