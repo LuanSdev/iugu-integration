@@ -30,16 +30,6 @@ describe('Create invoice', () => {
     await expect(promise).rejects.toThrow(new Error('missing postHttpRequest'));
   });
 
-  it('Should throw if no url is provided', async () => {
-    const { sut } = makeSut();
-
-    //eslint-disable-next-line
-    //@ts-ignore
-    const promise = sut.create();
-
-    await expect(promise).rejects.toThrow(new Error('missing url'));
-  });
-
   it('Should throw if response status is ERROR', async () => {
     const { sut, postHttpRequestSpy } = makeSut();
     postHttpRequestSpy.data = { status: 'ERROR' };

@@ -1,18 +1,35 @@
-import { CreateInvoice } from '../../../../src/main/invoice/create-invoice';
+import { ApproveInvoice } from '../../../../src/main/invoice/approve-invoice';
+import { IuguApproveInvoiceRequest } from '../../../../src/@types/iugu-invoice-approve-request';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
 
-  postHttpRequestSpy.data = { status: 'SUCCESS' };
-
-  const sut = new CreateInvoice({ postHttpRequest: postHttpRequestSpy });
+  const sut = new ApproveInvoice({ postHttpRequest: postHttpRequestSpy });
 
   return { sut, postHttpRequestSpy };
 };
 
+const VALID_REQUEST: IuguApproveInvoiceRequest = {
+  invoice_id: 'valid-id',
+};
+
 describe('Approve invoice', () => {
+  it('Should throw if no postHttpRequest is provided', async () => {
+    //eslint-disable-next-line
+    //@ts-ignore
+    const sut = new ApproveInvoice();
+    const promise = sut.create(VALID_REQUEST);
+
+    await expect(promise).rejects.toThrow(new Error('missing postHttpRequest'));
+  });
+
   it('Should calls postHttpRequest once time with correct values', async () => {
-    const { sut } = makeSut();
+    const { sut, postHttpRequestSpy } = makeSut();
+
+    await sut.create(VALID_REQUEST);
+
+    expect(postHttpRequestSpy.callsCount).toBe(1);
+    expect(postHttpRequestSpy.httpRequest.body).toEqual(VALID_REQUEST);
   });
 });
