@@ -9,7 +9,6 @@ type CreateInvoiceConstructor = {
   postHttpRequest: IPostHttpRequest;
 };
 export class CreateInvoice {
-  private readonly data: IuguInvoiceCreateRequest;
   private readonly postHttpRequest: IPostHttpRequest;
 
   constructor(props: CreateInvoiceConstructor) {
