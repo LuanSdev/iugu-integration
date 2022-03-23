@@ -14,8 +14,12 @@ export class CreateInvoice {
   }
 
   async create(data: IuguInvoiceCreateRequest) {
+    if (!this.postHttpRequest) {
+      throw new Error('missing postHttpRequest');
+    }
+
     if (!data) {
-      throw new Error('Missing invoice data');
+      throw new Error('missing url');
     }
 
     await this.postHttpRequest.post<null, IuguInvoiceCreateRequest>({

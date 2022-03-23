@@ -48,16 +48,16 @@ describe('Create invoice', () => {
       payable_with: ['all'],
     });
 
-    await expect(promise).rejects.toThrow();
+    await expect(promise).rejects.toThrow(new Error('missing postHttpRequest'));
   });
 
-  it('Should throw if no params is provided', async () => {
+  it('Should throw if no url is provided', async () => {
     const { sut } = makeSut();
 
     //eslint-disable-next-line
     //@ts-ignore
     const promise = sut.create();
 
-    await expect(promise).rejects.toThrow();
+    await expect(promise).rejects.toThrow(new Error('missing url'));
   });
 });
