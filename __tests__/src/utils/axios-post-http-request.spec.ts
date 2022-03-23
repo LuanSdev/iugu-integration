@@ -1,4 +1,4 @@
-import { AxiosPostHttpRequest } from './axios-post-http-request';
+import { AxiosPostHttpRequest } from '../../../src/utils/axios-post-http-request';
 
 const makeSut = () => {
   const sut = new AxiosPostHttpRequest();
