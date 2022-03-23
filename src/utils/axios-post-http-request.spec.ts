@@ -1,19 +1,4 @@
-import axios from 'axios';
-
-import { THttpRequest } from '../@types/http-request';
-import { IPostHttpRequest } from './protocols/post-http-request';
-
-class AxiosPostHttpRequest implements IPostHttpRequest {
-  async post<TResponse, TParams>(
-    httpRequest: THttpRequest<TParams>
-  ): Promise<TResponse> {
-    const { query, url } = httpRequest;
-
-    const { data } = await axios.post(url, { params: { query } });
-
-    return data;
-  }
-}
+import { AxiosPostHttpRequest } from './axios-post-http-request';
 
 const makeSut = () => {
   const sut = new AxiosPostHttpRequest();
