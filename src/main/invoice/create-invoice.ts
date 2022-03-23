@@ -1,4 +1,7 @@
-import { IuguInvoiceCreateRequest } from '../../@types';
+import {
+  IuguInvoiceCreateRequest,
+  IuguInvoiceCreateResponse,
+} from '../../@types';
 import { IUGU_API_URL } from '../../contants/apis';
 import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
 
@@ -22,9 +25,16 @@ export class CreateInvoice {
       throw new Error('missing url');
     }
 
-    await this.postHttpRequest.post<null, IuguInvoiceCreateRequest>({
+    const response = await this.postHttpRequest.post<
+      IuguInvoiceCreateResponse,
+      IuguInvoiceCreateRequest
+    >({
       url: `${IUGU_API_URL}/invoices`,
       body: data,
     });
+
+    if (response.status !== 'SUCCESS') {
+      throw new Error('error to create invoice');
+    }
   }
 }
