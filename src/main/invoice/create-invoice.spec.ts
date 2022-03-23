@@ -1,6 +1,6 @@
-import { THttpRequest } from '../@types/http-request';
-import { IPostHttpRequest } from '../utils/protocols/post-http-request';
-import { IuguInvoiceCreateRequest } from '../@types';
+import { THttpRequest } from '../../@types/http-request';
+import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
+import { IuguInvoiceCreateRequest } from '../../@types';
 import { CreateInvoice } from './create-invoice';
 
 class PostHttpRequestSpy implements IPostHttpRequest {

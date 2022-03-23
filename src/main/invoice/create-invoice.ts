@@ -1,6 +1,6 @@
-import { IuguInvoiceCreateRequest } from '../@types';
-import { IUGU_API_URL } from '../contants/apis';
-import { IPostHttpRequest } from '../utils/protocols/post-http-request';
+import { IuguInvoiceCreateRequest } from '../../@types';
+import { IUGU_API_URL } from '../../contants/apis';
+import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
 
 type CreateInvoiceConstructor = {
   postHttpRequest: IPostHttpRequest;
