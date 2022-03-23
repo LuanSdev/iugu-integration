@@ -1,13 +1,16 @@
-import { IuguInvoiceCreateRequest, IuguInvoiceCreateResponse } from '@types';
-import { IuguConfig } from '../config/iugu-config';
+import { IuguInvoiceCreateRequest } from '../@types';
+import { IUGU_API_URL } from '../contants/apis';
+import { IPostHttpRequest } from '../utils/protocols/post-http-request';
 
-export class CreateInvoice extends IuguConfig {
-  private data: IuguInvoiceCreateRequest;
+type CreateInvoiceConstructor = {
+  postHttpRequest: IPostHttpRequest;
+};
+export class CreateInvoice {
+  private readonly data: IuguInvoiceCreateRequest;
+  private readonly postHttpRequest: IPostHttpRequest;
 
-  constructor() {
-    super();
-
-    this.handle = this.handle.bind(this);
+  constructor(props: CreateInvoiceConstructor) {
+    this.postHttpRequest = props.postHttpRequest;
   }
 
   async create(data: IuguInvoiceCreateRequest) {
@@ -15,23 +18,9 @@ export class CreateInvoice extends IuguConfig {
       throw new Error('Missing invoice data');
     }
 
-    this.data = data;
-
-    return new Promise<IuguInvoiceCreateResponse>(this.handle);
-  }
-
-  private handle(resolve) {
-    this.request.invoice.create(
-      this.data,
-      (error: any, response: IuguInvoiceCreateResponse) => {
-        if (error) {
-          console.error(error);
-
-          return;
-        }
-
-        resolve(response);
-      }
-    );
+    await this.postHttpRequest.post<null, IuguInvoiceCreateRequest>({
+      url: `${IUGU_API_URL}/invoices`,
+      body: data,
+    });
   }
 }
