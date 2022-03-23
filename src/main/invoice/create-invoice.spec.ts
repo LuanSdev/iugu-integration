@@ -73,4 +73,13 @@ describe('Create invoice', () => {
 
     await expect(promise).rejects.toThrow(new Error('error to create invoice'));
   });
+
+  it('Should calls postHttpRequest once time with correct values', async () => {
+    const { sut, postHttpRequestSpy } = makeSut();
+
+    await sut.create(VALID_REQUEST);
+
+    expect(postHttpRequestSpy.callsCount).toBe(1);
+    expect(postHttpRequestSpy.httpRequest.body).toEqual(VALID_REQUEST);
+  });
 });
