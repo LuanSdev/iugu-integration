@@ -35,6 +35,22 @@ const makeSut = () => {
 };
 
 describe('Create invoice', () => {
+  it('Should throw if no postHttpRequest is provided', async () => {
+    //eslint-disable-next-line
+    //@ts-ignore
+    const sut = new CreateInvoice();
+
+    const promise = sut.create({
+      customer_id: 'valid-id',
+      due_date: new Date(),
+      email: 'valid-email',
+      item: [{ quantity: 1, price_cents: 1 }],
+      payable_with: ['all'],
+    });
+
+    await expect(promise).rejects.toThrow();
+  });
+
   it('Should throw if no params is provided', async () => {
     const { sut } = makeSut();
 

@@ -10,7 +10,7 @@ export class CreateInvoice {
   private readonly postHttpRequest: IPostHttpRequest;
 
   constructor(props: CreateInvoiceConstructor) {
-    this.postHttpRequest = props.postHttpRequest;
+    this.postHttpRequest = props?.postHttpRequest;
   }
 
   async create(data: IuguInvoiceCreateRequest) {
