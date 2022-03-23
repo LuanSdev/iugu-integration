@@ -1,31 +1,6 @@
-import { THttpRequest } from '../../@types/http-request';
-import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
-import { IuguInvoiceCreateRequest } from '../../@types';
-import { CreateInvoice } from './create-invoice';
-
-class PostHttpRequestSpy implements IPostHttpRequest {
-  public data: any;
-  public callsCount: number;
-  public httpRequest: THttpRequest<any>;
-
-  constructor() {
-    this.callsCount = 0;
-    this.data = {
-      id: 'any-id',
-    };
-  }
-
-  async post(httpRequest: any): Promise<any> {
-    this.callsCount++;
-    this.httpRequest = httpRequest;
-
-    return this.data;
-  }
-}
-
-const makePostHttpRequestSpy = () => {
-  return new PostHttpRequestSpy();
-};
+import { IuguInvoiceCreateRequest } from '../../../../src/@types';
+import { CreateInvoice } from '../../../../src/main/invoice/create-invoice';
+import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
