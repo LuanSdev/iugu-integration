@@ -19,7 +19,7 @@ export class ApproveInvoice {
     }
 
     if (!data) {
-      throw new Error('missing url');
+      throw new Error('missing request data');
     }
 
     await this.postHttpRequest.post<null, IuguApproveInvoiceRequest>({

@@ -21,7 +21,7 @@ export class CreateInvoice {
     }
 
     if (!data) {
-      throw new Error('missing url');
+      throw new Error('missing request data');
     }
 
     const response = await this.postHttpRequest.post<

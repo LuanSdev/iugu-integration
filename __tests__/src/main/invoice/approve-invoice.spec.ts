@@ -24,6 +24,16 @@ describe('Approve invoice', () => {
     await expect(promise).rejects.toThrow(new Error('missing postHttpRequest'));
   });
 
+  it('Should throw if no request data is provided', async () => {
+    const { sut } = makeSut();
+
+    //eslint-disable-next-line
+    //@ts-ignore
+    const promise = sut.create();
+
+    await expect(promise).rejects.toThrow(new Error('missing request data'));
+  });
+
   it('Should calls postHttpRequest once time with correct values', async () => {
     const { sut, postHttpRequestSpy } = makeSut();
 
