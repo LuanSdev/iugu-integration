@@ -10,5 +10,5 @@
     "typeRoots": ["./@types", "node_modules/@types"],
     "types": ["@types/jest", "node"]
   },
-  "include": ["src", "__tests__/src/**/*"]
+  "include": ["src/**/*", "__tests__/src/**/*"]
 }
