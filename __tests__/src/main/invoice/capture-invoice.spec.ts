@@ -1,36 +1,5 @@
-import { IUGU_API_URL } from '../../../../src/contants/apis';
-import { IPostHttpRequest } from '../../../../src/utils/protocols/post-http-request';
+import { CaptureInvoice } from '../../../../src/main/invoice/capture-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
-
-type CaptureInvoiceConstructor = {
-  postHttpRequest: IPostHttpRequest;
-};
-
-type CaptureInvoiceProps = {
-  invoiceId: string;
-};
-
-class CaptureInvoice {
-  private readonly postHttpRequest: IPostHttpRequest;
-
-  constructor(props: CaptureInvoiceConstructor) {
-    this.postHttpRequest = props?.postHttpRequest;
-  }
-
-  async capture(props: CaptureInvoiceProps) {
-    if (!this.postHttpRequest) {
-      throw new Error('missing postHttpRequest');
-    }
-
-    if (!props?.invoiceId) {
-      throw new Error('missing invoiceId');
-    }
-
-    const endpoint = `${IUGU_API_URL}/invoices/${props.invoiceId}/capture`;
-
-    await this.postHttpRequest.post({ url: endpoint });
-  }
-}
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
