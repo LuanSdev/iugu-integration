@@ -1,36 +1,5 @@
-import { IUGU_API_URL } from '../../../../src/contants/apis';
-import { IPostHttpRequest } from '../../../../src/utils/protocols/post-http-request';
+import { RefundInvoice } from '../../../../src/main/invoice/refund-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
-
-type RefundInvoiceConstructor = {
-  postHttpRequest: IPostHttpRequest;
-};
-
-type RefundInvoiceProps = {
-  invoiceId: string;
-};
-
-class RefundInvoice {
-  private readonly postHttpRequest: IPostHttpRequest;
-
-  constructor(props: RefundInvoiceConstructor) {
-    this.postHttpRequest = props?.postHttpRequest;
-  }
-
-  async refund(props: RefundInvoiceProps) {
-    if (!this.postHttpRequest) {
-      throw new Error('missing postHttpRequest');
-    }
-
-    if (!props?.invoiceId) {
-      throw new Error('missing invoiceId');
-    }
-
-    const endpoint = `${IUGU_API_URL}/invoices/${props.invoiceId}/refund`;
-
-    await this.postHttpRequest.post({ url: endpoint });
-  }
-}
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
