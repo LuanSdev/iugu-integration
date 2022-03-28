@@ -1,4 +1,4 @@
-import { CaptureInvoice } from '../../../../src/main/invoice/capture-invoice';
+import { CaptureInvoice } from '../../../../src/usecases/invoice/capture-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {

@@ -1,4 +1,4 @@
-import { CancelInvoice } from '../../../../src/main/invoice/cancel-invoice';
+import { CancelInvoice } from '../../../../src/usecases/invoice/cancel-invoice';
 import { makePutHttpRequestSpy } from '../../../spys/put-http-request';
 
 const makeSut = () => {

@@ -1,4 +1,4 @@
-import { ApproveInvoice } from '../../../../src/main/invoice/approve-invoice';
+import { ApproveInvoice } from '../../../../src/usecases/invoice/approve-invoice';
 import { IuguApproveInvoiceRequest } from '../../../../src/@types/iugu-invoice-approve-request';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 

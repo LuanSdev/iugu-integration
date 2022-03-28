@@ -1,4 +1,4 @@
-import { RefundInvoice } from '../../../../src/main/invoice/refund-invoice';
+import { RefundInvoice } from '../../../../src/usecases/invoice/refund-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {

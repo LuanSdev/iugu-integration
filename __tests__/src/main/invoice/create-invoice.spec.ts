@@ -1,5 +1,5 @@
 import { IuguInvoiceCreateRequest } from '../../../../src/@types';
-import { CreateInvoice } from '../../../../src/main/invoice/create-invoice';
+import { CreateInvoice } from '../../../../src/usecases/invoice/create-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {
