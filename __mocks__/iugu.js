@@ -7,6 +7,6 @@ module.exports = {
     this.createPaymentTokenCalls++;
     this.data = data;
 
-    return this.response;
+    response(this.createPaymentTokenResponse);
   },
 };
