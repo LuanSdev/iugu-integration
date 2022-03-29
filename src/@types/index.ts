@@ -5,3 +5,4 @@ export * from './iugu-invoice-create-response';
 export * from './iugu-invoice-item';
 export * from './iugu-method-of-payment';
 export * from './iugu-pix';
+export * from './iugu-credit-card';
