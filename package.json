@@ -22,6 +22,7 @@
     "test:unit": "jest --watch -o --maxWorkers=1"
   },
   "dependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.26.1",
+    "iugu": "^0.0.6"
   }
 }
