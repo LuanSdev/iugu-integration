@@ -1,20 +1,6 @@
 import iugu from 'iugu';
 
-import { IuguCreditCard } from '@types';
-
-class CreateToken {
-  async create(data: IuguCreditCard) {
-    return new Promise((resolve) => {
-      iugu.createPaymentToken(data, ({ id, errors }) => {
-        if (errors) {
-          throw new Error('Error to create creadit card');
-        }
-
-        resolve(id);
-      });
-    });
-  }
-}
+import { CreateToken } from '../../../../src/usecases/token/create-token';
 
 const makeSut = () => {
   const sut = new CreateToken();
