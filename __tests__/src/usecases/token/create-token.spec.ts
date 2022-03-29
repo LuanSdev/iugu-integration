@@ -4,12 +4,14 @@ import { IuguCreditCard } from '@types';
 
 class CreateToken {
   async create(data: IuguCreditCard) {
-    await iugu.createPaymentToken(data, ({ id, errors }) => {
-      if (errors) {
-        throw new Error('Error to create creadit card');
-      }
+    return new Promise((resolve) => {
+      iugu.createPaymentToken(data, ({ id, errors }) => {
+        if (errors) {
+          throw new Error('Error to create creadit card');
+        }
 
-      return id;
+        resolve(id);
+      });
     });
   }
 }
@@ -37,5 +39,13 @@ describe('Create token', () => {
 
     expect(iugu.createPaymentTokenCalls).toBe(1);
     expect(iugu.data).toEqual(VALID_CARD);
+  });
+
+  it('Should returns a token', async () => {
+    const { sut } = makeSut();
+
+    const token = await sut.create(VALID_CARD);
+
+    expect(token).toBeTruthy();
   });
 });
