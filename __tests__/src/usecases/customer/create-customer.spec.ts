@@ -2,6 +2,7 @@ import { IPostHttpRequest } from '../../../../src/utils/protocols/post-http-requ
 import { IuguCustomer } from '../../../../src/@types/iugu-customer';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 import { VALID_CUSTOMER } from './helpers/valid-customer';
+import { IUGU_API_URL } from '../../../../src/contants/apis';
 
 type ConstructorProps = {
   postHttpClient: IPostHttpRequest;
@@ -18,6 +19,11 @@ class CreateCustomer {
     if (!this.postHttpClient) {
       throw new Error('Server Error.');
     }
+
+    await this.postHttpClient.post({
+      url: `${IUGU_API_URL}/customers`,
+      body: data,
+    });
   }
 }
 
@@ -37,5 +43,14 @@ describe('Create customer', () => {
     const promise = sut.create(VALID_CUSTOMER);
 
     await expect(promise).rejects.toThrow();
+  });
+
+  it('Should calls postHttpRequest once time with correct values', async () => {
+    const { sut, postHttpRequestSpy } = makeSut();
+
+    await sut.create(VALID_CUSTOMER);
+
+    expect(postHttpRequestSpy.callsCount).toBe(1);
+    expect(postHttpRequestSpy.httpRequest.body).toBe(VALID_CUSTOMER);
   });
 });
