@@ -20,6 +20,10 @@ class CreateCustomer {
       throw new Error('Server Error.');
     }
 
+    if (!data) {
+      throw new Error('Missing data.');
+    }
+
     await this.postHttpClient.post({
       url: `${IUGU_API_URL}/customers`,
       body: data,
@@ -52,5 +56,15 @@ describe('Create customer', () => {
 
     expect(postHttpRequestSpy.callsCount).toBe(1);
     expect(postHttpRequestSpy.httpRequest.body).toBe(VALID_CUSTOMER);
+  });
+
+  it('Should throws if no props are provided', async () => {
+    const { sut } = makeSut();
+
+    //eslint-disable-next-line
+    //@ts-ignore
+    const promise = sut.create();
+
+    await expect(promise).rejects.toThrow();
   });
 });
