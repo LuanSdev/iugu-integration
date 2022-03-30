@@ -1,35 +1,7 @@
-import { IPostHttpRequest } from '../../../../src/utils/protocols/post-http-request';
-import { IuguCustomer } from '../../../../src/@types/iugu-customer';
+import { CreateCustomer } from '../../../../src/usecases/customer/create-customer';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
+
 import { VALID_CUSTOMER } from './helpers/valid-customer';
-import { IUGU_API_URL } from '../../../../src/contants/apis';
-
-type ConstructorProps = {
-  postHttpClient: IPostHttpRequest;
-};
-
-class CreateCustomer {
-  private readonly postHttpClient: IPostHttpRequest;
-
-  constructor(props: ConstructorProps) {
-    Object.assign(this, props);
-  }
-
-  async create(data: IuguCustomer) {
-    if (!this.postHttpClient) {
-      throw new Error('Server Error.');
-    }
-
-    if (!data) {
-      throw new Error('Missing data.');
-    }
-
-    await this.postHttpClient.post({
-      url: `${IUGU_API_URL}/customers`,
-      body: data,
-    });
-  }
-}
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
