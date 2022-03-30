@@ -1,7 +1,7 @@
 import iugu from 'iugu';
 
 import { CreateToken } from '../../../../src/usecases/token/create-token';
-import { VALID_CREDIT_CARD } from './helpers/valid-credit-card';
+import { VALID_CREDIT_CARD } from '../__helpers__/valid-credit-card';
 
 const makeSut = () => {
   const sut = new CreateToken();

@@ -1,7 +1,7 @@
 import { CreateCustomer } from '../../../../src/usecases/customer/create-customer';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
-import { VALID_CUSTOMER } from './helpers/valid-customer';
+import { VALID_CUSTOMER } from '../__helpers__/valid-customer';
 
 const makeSut = () => {
   const postHttpRequestSpy = makePostHttpRequestSpy();
