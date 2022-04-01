@@ -72,6 +72,13 @@ class CreateCreditCard implements ICreateCreditCard<CreateCreditCardData> {
       throw new Error('missing data.');
     }
 
+    const { customer, token, description } = data;
+
+    await Promise.all([
+      this.createCustomer.create(customer),
+      this.createToken.create(token),
+    ]);
+
     return { id: 'any-id' };
   }
 }
@@ -85,7 +92,7 @@ const makeSut = () => {
     createToken: createTokenSpy,
   });
 
-  return { sut };
+  return { sut, createCustomerSpy, createTokenSpy };
 };
 
 const VALID_DATA: CreateCreditCardData = {
@@ -126,5 +133,16 @@ describe('Create credit card', () => {
     const promise = sut.create();
 
     await expect(promise).rejects.toThrow();
+  });
+
+  it('Should calls dependencies once time with correct values', async () => {
+    const { sut, createCustomerSpy, createTokenSpy } = makeSut();
+
+    await sut.create(VALID_DATA);
+
+    expect(createCustomerSpy.callsCount).toBe(1);
+    expect(createCustomerSpy.data).toBe(VALID_DATA.customer);
+    expect(createTokenSpy.callsCount).toBe(1);
+    expect(createTokenSpy.data).toBe(VALID_DATA.token);
   });
 });
