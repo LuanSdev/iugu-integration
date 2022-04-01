@@ -65,7 +65,11 @@ class CreateCreditCard implements ICreateCreditCard<CreateCreditCardData> {
 
   async create(data: CreateCreditCardData): Promise<{ id: string }> {
     if (!this.createCustomer || !this.createToken) {
-      throw new Error('missing dependencies');
+      throw new Error('missing dependencies.');
+    }
+
+    if (!data) {
+      throw new Error('missing data.');
     }
 
     return { id: 'any-id' };
@@ -110,6 +114,16 @@ describe('Create credit card', () => {
     const sut = new CreateCreditCard();
 
     const promise = sut.create(VALID_DATA);
+
+    await expect(promise).rejects.toThrow();
+  });
+
+  it('Should throws if no data are provided', async () => {
+    const { sut } = makeSut();
+
+    //eslint-disable-next-line
+    //@ts-ignore
+    const promise = sut.create();
 
     await expect(promise).rejects.toThrow();
   });
