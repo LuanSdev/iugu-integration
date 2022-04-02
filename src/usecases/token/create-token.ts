@@ -1,7 +1,7 @@
 import iugu from 'iugu';
 
-import { IuguCreditCard } from '../../../src/@types/iugu-credit-card';
-import { IuguCreateTokenResponse } from '../../../src/@types/iugu-create-token-response';
+import { IuguCreditCard } from '../../../src/@types/iugu/iugu-credit-card';
+import { IuguCreateTokenResponse } from '../../../src/@types/iugu/iugu-create-token-response';
 
 type CreateTokenProps = IuguCreateTokenResponse & {
   errors: any;
