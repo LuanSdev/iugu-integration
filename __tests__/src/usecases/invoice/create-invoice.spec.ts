@@ -1,4 +1,4 @@
-import { IuguInvoiceCreateRequest } from '../../../../src/@types';
+import { IuguInvoiceCreateRequest } from '../../../../src/@types/iugu';
 import { CreateInvoice } from '../../../../src/usecases/invoice/create-invoice';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
