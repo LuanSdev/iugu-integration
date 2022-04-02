@@ -8,9 +8,11 @@ import { ICreateToken } from '../../usecases/protocols/create-token';
 import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
 
 type CreateCreditCardData = {
-  token: IuguCreateTokenRequest;
-  customer: IuguCustomer;
-  description: string;
+  data: {
+    token: IuguCreateTokenRequest;
+    description: string;
+  };
+  customerId: string;
 };
 
 type ConstructorProps = {
@@ -29,16 +31,17 @@ export class CreateCreditCard
   }
 
   async create(
-    data: CreateCreditCardData
+    props: CreateCreditCardData
   ): Promise<IuguCreditCardPreview & { id: string }> {
     if (!this.postHttpRequest || !this.createToken) {
       throw new Error('missing dependencies.');
     }
 
-    if (!data) {
-      throw new Error('missing data.');
+    if (!props) {
+      throw new Error('missing props.');
     }
 
+    const { customerId, data } = props;
     const { token } = await this.createToken.create(data.token);
 
     const postData = {
@@ -50,7 +53,7 @@ export class CreateCreditCard
       IuguCreateCreditCardResponse,
       any
     >({
-      url: `${IUGU_API_URL}/customers/any-id/payment_methods`,
+      url: `${IUGU_API_URL}/customers/${customerId}/payment_methods`,
       body: postData,
     });
 

@@ -17,14 +17,16 @@ const makeSut = () => {
 };
 
 const VALID_DATA = {
-  token: {
-    account_id: 'any-id',
-    data: VALID_CREDIT_CARD,
-    method: 'credit_card',
-    test: true,
+  customerId: 'valid-id',
+  data: {
+    token: {
+      account_id: 'any-id',
+      data: VALID_CREDIT_CARD,
+      method: 'credit_card',
+      test: true,
+    },
+    description: 'any-description',
   },
-  customer: VALID_CUSTOMER,
-  description: 'any-description',
 };
 
 describe('Create credit card', () => {
@@ -62,7 +64,7 @@ describe('Create credit card', () => {
     await sut.create(VALID_DATA);
 
     expect(createTokenSpy.callsCount).toBe(1);
-    expect(createTokenSpy.data).toBe(VALID_DATA.token);
+    expect(createTokenSpy.data).toBe(VALID_DATA.data.token);
     expect(postHttpRequestSpy.callsCount).toBe(1);
     expect(postHttpRequestSpy.data).toEqual({ id: 'any-id' });
   });
