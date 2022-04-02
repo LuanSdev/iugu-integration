@@ -1,5 +1,5 @@
 import { ApproveInvoice } from '../../../../src/usecases/invoice/approve-invoice';
-import { IuguApproveInvoiceRequest } from '../../../../src/@types/iugu-invoice-approve-request';
+import { IuguApproveInvoiceRequest } from '../../../../src/@types/iugu/iugu-invoice-approve-request';
 import { makePostHttpRequestSpy } from '../../../spys/post-http-request';
 
 const makeSut = () => {
