@@ -1,7 +1,7 @@
 import {
   IuguInvoiceCreateRequest,
   IuguInvoiceCreateResponse,
-} from '../../@types';
+} from '../../@types/iugu';
 import { IUGU_API_URL } from '../../contants/apis';
 import { IPostHttpRequest } from '../../utils/protocols/post-http-request';
 
